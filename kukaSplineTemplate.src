@@ -1,0 +1,63 @@
+&ACCESS RVP
+&REL 2
+&PARAM EDITMASK = *
+&PARAM TEMPLATE = C:\KRC\Roboter\Template\vorgabe
+DEF mimi( )
+;FOLD INI;%{PE}
+  ;FOLD BASISTECH INI
+    GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
+    INTERRUPT ON 3
+    BAS (#INITMOV,0 )
+  ;ENDFOLD (BASISTECH INI)
+  ;FOLD USER INI
+    ;Make your modifications here
+
+  ;ENDFOLD (USER INI)
+;ENDFOLD (INI)
+
+;FOLD PTP HOME  Vel= 2 % DEFAULT;%{PE}%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:HOME, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FHOME
+BAS (#PTP_PARAMS,2 )
+$H_POS=XHOME
+PTP  XHOME
+;ENDFOLD
+
+$BWDSTART=FALSE
+LDAT_ACT=LCPDAT[[firstIndex]]
+FDAT_ACT=FP[[firstIndex]]
+BAS(#CP_PARAMS,2)
+		
+;FOLD Shape SPLINE
+	SPLINE
+		TIME_BLOCK START
+		[[range .Points]]
+			SPL XP[[.Index]]
+			[[if .TimeMark]]
+			;Time mark at [[.TimeCode]]s with value [[.TimeMark]]s
+			TIME_BLOCK PART = [[.TimeMark]]
+			[[end]]
+			[[if rMarkTest .Index .TimeMark]]
+			;Time mark at [[.TimeCode]]s with value [[rTime]]s
+			TIME_BLOCK PART = [[rTime]]
+			[[end]]
+		[[end]]
+		TIME_BLOCK END = [[totalTime]]
+	ENDSPLINE
+;ENDFOLD
+
+;FOLD WAIT Time=2.5 sec;%{PE}%R 8.3.31,%MKUKATPBASIS,%CWAIT,%VWAIT,%P 3:2.5
+WAIT SEC 2.5
+;ENDFOLD
+
+;FOLD PTP HOME  Vel= 2 % DEFAULT;%{PE}%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:HOME, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FHOME
+BAS (#PTP_PARAMS,2 )
+$H_POS=XHOME
+PTP  XHOME
+;ENDFOLD
+
+END

@@ -1,0 +1,23 @@
+&ACCESS RVP
+&REL 2
+&PARAM EDITMASK = *
+&PARAM TEMPLATE = C:\KRC\Roboter\Template\vorgabe
+DEFDAT  kimchiandchips
+;FOLD EXTERNAL DECLARATIONS;%{PE}%MKUKATPBASIS,%CEXT,%VCOMMON,%P
+;FOLD BASISTECH EXT;%{PE}%MKUKATPBASIS,%CEXT,%VEXT,%P
+EXT  BAS (BAS_COMMAND  :IN,REAL  :IN )
+DECL INT SUCCESS
+;ENDFOLD (BASISTECH EXT)
+;FOLD USER EXT;%{E}%MKUKATPUSER,%CEXT,%VEXT,%P
+;Make your modifications here
+
+;ENDFOLD (USER EXT)
+;ENDFOLD (EXTERNAL DECLARATIONS)
+DECL BASIS_SUGG_T LAST_BASIS={POINT1[] "P[[fTotal]]",POINT2[] "P[[fTotal]]",CP_PARAMS[] "CPDAT[[pTotal]]",PTP_PARAMS[] "PDAT0                   ",CONT[] "                        ",CP_VEL[] "2                     ",PTP_VEL[] "100                     ",SYNC_PARAMS[] "SYNCDAT                 ",SPL_NAME[] "S0                      ",A_PARAMS[] "ADAT0                   "}
+[[range .Points]]
+DECL E6POS XP[[.Index]]={X [[.X]],Y [[.Y]],Z [[.Z]],A   [[.A]],B   [[.B]],C   [[.C]],S [[.S]],T [[.T]],E1 [[.E1]],E2 [[.E2]],E3 [[.E3]],E4 [[.E4]],E5 [[.E5]],E6 [[.E6]]}
+[[if first .Index]]DECL FDAT FP[[.Index]]={TOOL_NO 1,BASE_NO 0,IPO_FRAME #BASE,POINT2[] " ",TQ_STATE FALSE}
+DECL LDAT LCPDAT[[.Index]]={VEL 2.00000,ACC 50.000,APO_DIST 100.000,APO_FAC 50.0000,AXIS_VEL 100.000,AXIS_ACC 25.000,ORI_TYP #VAR,CIRC_TYP #BASE,JERK_FAC 50.0000,GEAR_JERK 50.0000,EXAX_IGN 0}[[end]]
+[[end]]
+
+ENDDAT
