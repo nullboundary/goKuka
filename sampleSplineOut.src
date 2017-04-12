@@ -1,0 +1,233 @@
+&ACCESS RVP
+&REL 2
+&PARAM EDITMASK = *
+&PARAM TEMPLATE = C:\KRC\Roboter\Template\vorgabe
+DEF mimi( )
+;FOLD INI;%{PE}
+  ;FOLD BASISTECH INI
+    GLOBAL INTERRUPT DECL 3 WHEN $STOPMESS==TRUE DO IR_STOPM ( )
+    INTERRUPT ON 3
+    BAS (#INITMOV,0 )
+  ;ENDFOLD (BASISTECH INI)
+  ;FOLD USER INI
+    ;Make your modifications here
+
+  ;ENDFOLD (USER INI)
+;ENDFOLD (INI)
+
+;FOLD PTP HOME  Vel= 2 % DEFAULT;%{PE}%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:HOME, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FHOME
+BAS (#PTP_PARAMS,2 )
+$H_POS=XHOME
+PTP  XHOME
+;ENDFOLD
+
+$BWDSTART=FALSE
+LDAT_ACT=LCPDAT1
+FDAT_ACT=FP1
+BAS(#CP_PARAMS,2)
+		
+;FOLD Shape SPLINE
+	SPLINE
+		TIME_BLOCK START
+		
+			SPL XP1
+			
+			
+		
+			SPL XP2
+			
+			;Time mark at 1s with value 1s
+			TIME_BLOCK PART = 1
+			
+			
+		
+			SPL XP3
+			
+			
+		
+			SPL XP4
+			
+			
+		
+			SPL XP5
+			
+			
+		
+			SPL XP6
+			
+			
+		
+			SPL XP7
+			
+			
+		
+			SPL XP8
+			
+			
+		
+			SPL XP9
+			
+			;Time mark at 2s with value 1s
+			TIME_BLOCK PART = 1
+			
+			
+		
+			SPL XP10
+			
+			
+		
+			SPL XP11
+			
+			
+		
+			SPL XP12
+			
+			
+		
+			SPL XP13
+			
+			
+		
+			SPL XP14
+			
+			
+		
+			SPL XP15
+			
+			
+		
+			SPL XP16
+			
+			
+		
+			SPL XP17
+			
+			
+		
+			SPL XP18
+			
+			
+		
+			SPL XP19
+			
+			
+		
+			SPL XP20
+			
+			
+		
+			SPL XP21
+			
+			
+		
+			SPL XP22
+			
+			
+		
+			SPL XP23
+			
+			
+		
+			SPL XP24
+			
+			;Time mark at 3s with value 1s
+			TIME_BLOCK PART = 1
+			
+			
+		
+			SPL XP25
+			
+			
+		
+			SPL XP26
+			
+			
+		
+			SPL XP27
+			
+			
+		
+			SPL XP28
+			
+			
+		
+			SPL XP29
+			
+			
+		
+			SPL XP30
+			
+			
+		
+			SPL XP31
+			
+			;Time mark at 4.7s with value 1.7s
+			TIME_BLOCK PART = 1.7
+			
+			
+		
+			SPL XP32
+			
+			
+		
+			SPL XP33
+			
+			;Time mark at 5.8333s with value 1.1333s
+			TIME_BLOCK PART = 1.1333
+			
+			
+		
+			SPL XP34
+			
+			
+		
+			SPL XP35
+			
+			
+		
+			SPL XP36
+			
+			
+		
+			SPL XP37
+			
+			;Time mark at 7s with value 1.1667s
+			TIME_BLOCK PART = 1.1667
+			
+			
+		
+			SPL XP38
+			
+			;Time mark at 8s with value 1s
+			TIME_BLOCK PART = 1
+			
+			
+		
+			SPL XP39
+			
+			;Time mark at 9s with value 1s
+			TIME_BLOCK PART = 1
+			
+			
+		
+		TIME_BLOCK END = 9.000000
+	ENDSPLINE
+;ENDFOLD
+
+;FOLD WAIT Time=2.5 sec;%{PE}%R 8.3.31,%MKUKATPBASIS,%CWAIT,%VWAIT,%P 3:2.5
+WAIT SEC 2.5
+;ENDFOLD
+
+;FOLD PTP HOME  Vel= 2 % DEFAULT;%{PE}%MKUKATPBASIS,%CMOVE,%VPTP,%P 1:PTP, 2:HOME, 3:, 5:100, 7:DEFAULT
+$BWDSTART = FALSE
+PDAT_ACT=PDEFAULT
+FDAT_ACT=FHOME
+BAS (#PTP_PARAMS,2 )
+$H_POS=XHOME
+PTP  XHOME
+;ENDFOLD
+
+END

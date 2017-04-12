@@ -154,7 +154,8 @@ func splineFile(c *cli.Context) {
 	}
 
 	splitValue := (float64(len(points)) / float64(maxPoints))
-	numFiles := math.Floor(float64(splitValue) + float64(0.5)) //round up
+	numFiles := math.Ceil(float64(splitValue)) //always round up
+	fmt.Printf("number of files: %d \n", int(numFiles))
 
 	for i := 0; i < int(numFiles); i++ {
 
